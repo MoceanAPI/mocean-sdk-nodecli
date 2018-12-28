@@ -1,32 +1,26 @@
 const EventEmitter = require("events").EventEmitter();
 
-class Emitter{
-
-    constructor()
-    {
+class Emitter {
+    constructor() {
         this.EventEmitter = new EventEmitter();
     }
-    instance()
-    {
-        if(!this.instance instanceof Emitter)
-        {
+
+    instance() {
+        if (!this.instance instanceof Emitter) {
             this.instance = new Emitter();
         }
         return this.instance;
     }
-    customEvent()
-    {
-        this.on("balance",()=>{
+
+    customEvent() {
+        this.on("balance", () => {
             console.log('request balance');
         })
     }
 
-    emit(e)
-    {
+    emit(e) {
         this.EventEmitter.emit()
     }
-
-    
 }
 
 module.exports = Emitter;
