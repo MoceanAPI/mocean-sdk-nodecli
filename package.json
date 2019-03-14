@@ -1,6 +1,6 @@
 {
   "name": "mocean-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "This is a Mocean SDK written in Node.js, to use it you will need a mocean account. Signup for free at https://moceanapi.com",
   "main": "app.js",
   "scripts": {

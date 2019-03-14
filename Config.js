@@ -1,7 +1,7 @@
 const fs = require("fs");
 const ini = require("ini");
-const emit = require("./Emitter");
-const request = require("./Request");
+const emit = require("./emitter");
+const request = require("./request");
 
 
 class Config {

@@ -1,5 +1,5 @@
 const moceansdk = require("mocean-sdk");
-const Config = require("./Config");
+const Config = require("./config");
 const clitable = require("cli-table2");
 const colors = require("colors");
 
