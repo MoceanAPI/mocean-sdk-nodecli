@@ -1,8 +1,8 @@
 {
   "name": "mocean-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This is a Mocean SDK written in Node.js, to use it you will need a mocean account. Signup for free at https://moceanapi.com",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
