@@ -1,6 +1,6 @@
 {
   "name": "mocean-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a Mocean CLI, to use it you will need a mocean account. Signup for free at https://moceanapi.com",
   "main": "dist/index.js",
   "scripts": {
