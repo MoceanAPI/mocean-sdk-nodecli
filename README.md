@@ -1,7 +1,7 @@
-MoceanAPI Client Library for Node CLI 
+Mocean CLI
 ============================
 
-This is the Node CLI client library for use Mocean's API. To use this, you'll need a Mocean account. Sign up [for free at 
+This is the powerful CLI program for use with Mocean's API. To use this, you'll need a Mocean account. Sign up [for free at 
 moceanapi.com][signup].
 
  * [Installation](#installation)
@@ -24,44 +24,109 @@ To install the Node CLI client library using [npm](https://www.npmjs.com/).
 npm i mocean-cli -g
 ```
 
-### First time setup
+### Usage
 
-Setup your mocean-cli with your API key and secret:
+After installation, login to the cli with your credentials
 
-```shell
-mocean setup <api_key> <api_secret>
+```bash
+> mocean login <api_key> <api_secret>
 ```
 
-## Example
+This will save your credentials to `~/.moceanrc`.  
+Add `--local` to save it in the directory which running the command
 
-To use [Mocean's SMS API][doc_sms] to send an SMS message, use `mocean sms <from> <to> <text>`.
-
-```javascript
-mocean sms Mocean 60123456789 "Hello World"
+```bash
+> mocean login <api_key> <api_secret> --local
 ```
 
-## Options
+Run `mocean logout` if you want to clear the credentials, this is strongly encouraged when running on untrusted device 
 
-```shell
-mocean -h
+```bash
+> mocean logout
+```
 
-Usage: app [options] [command]
+To logout from the directory, add `--local`
+
+```bash
+> mocean logout --local
+```
+
+### Account
+
+#### Account Info
+
+```bash
+> mocean account
+```
+
+Alias : `mocean acc`
+
+#### Account Balance
+
+```bash
+> mocean account:balance
+```
+
+Alias : `mocean ab`
+
+#### Account Pricing
+
+```bash
+> mocean account:pricing
+```
+
+Alias : `mocean ap`
+
+### Sms
+
+To use [Mocean's SMS API][doc_sms] to send an SMS message, use `mocean sms <to> <text>`.
+
+```bash
+> mocean sms 60123456789 "Hello World"
+```
+
+Default from will be `Mocean CLI`, you can override it by providing `--from` option
+
+```bash
+> mocean sms 60123456789 "Hello World" --from "Mocean"
+```
+
+#### Sms Message Status
+
+```bash
+> mocean sms:status <msg_id>
+```
+
+Qlias : `mocean ss <msg_id>`
+
+### Number Lookup
+
+```bash
+> mocean number:lookup <number>
+```
+
+Qlias : `mocean nl <number>`
+
+### Options
+
+```bash
+> mocean -h
+
+Usage: mocean [options] [command]
 
 Options:
-
--V, --version                        output the version number
--v, --verbose                        enables more rich output for certain commands
--h, --help                           output usage information
+  -V, --version                           output the version number
+  -h, --help                              output usage information
 
 Commands:
-
-setup <api_key> <api_secret>         Setup API credential
-balance                              Check balance
-price [options]                      Check price
-sms <from> <to> <text>               Send sms
-sms:status <message_id>              Check message status
-verify:request <brand> <recipient>   Send verify code to user
-verify:validate <request_id> <code>  Validate the verify code
+  login [options] <api_key> <api_secret>  Login using your api key and api secret
+  logout [options]                        Logout
+  account|acc                             Show logged in account
+  account:balance|ab                      Check Account Balance
+  account:pricing|ap                      Get Account Pricing
+  sms [options] <to> <text...>            Send a Sms
+  sms:status|ss <msg_id>                  Check message status
+  number:lookup|nl <number>               Perform Number Lookup
 ```
 
 License
@@ -70,7 +135,5 @@ License
 This library is released under the [MIT License][license]
 
 [signup]: https://dashboard.moceanapi.com/register?medium=github&campaign=sdk-javascript
-[doc_sms]: https://docs.moceanapi.com/?javascript#send-sms
-[doc_inbound]: https://docs.moceanapi.com/?javascript#receive-sms
-[doc_verify]: https://docs.moceanapi.com/?javascript#overview-3
-[license]: LICENSE.txt
+[doc_sms]: https://moceanapi.com/docs/?shell#send-sms
+[license]: LICENSE
