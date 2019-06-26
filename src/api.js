@@ -25,7 +25,7 @@ module.exports = {
             console.log(`Credentials save to ${chalk.yellow(savedPath)}`);
         } catch (e) {
             loader.stop();
-            console.error('Invalid credentials');
+            console.error(chalk.red('Invalid credentials'));
         }
     },
     logout(options) {
@@ -38,7 +38,7 @@ module.exports = {
             console.log(`API Key    : ${credentials.apiKey}`);
             console.log(`API Secret : ${credentials.apiSecret}`);
         } catch (e) {
-            console.error(`Not logged in, please run ${chalk.grey('mocean login <api_key> <api_secret>')}`);
+            console.error(e instanceof Error ? e.message : e);
         }
     },
     async balance() {
@@ -56,7 +56,7 @@ module.exports = {
             console.log(formatter(res));
         } catch (e) {
             loader.stop();
-            console.error(e);
+            console.error(e instanceof Error ? e.message : e);
         }
     },
     async pricing() {
@@ -76,7 +76,7 @@ module.exports = {
             })));
         } catch (e) {
             loader.stop();
-            console.error(e);
+            console.error(e instanceof Error ? e.message : e);
         }
     },
     async sms(to, text, options) {
@@ -99,7 +99,7 @@ module.exports = {
             })));
         } catch (e) {
             loader.stop();
-            console.error(e);
+            console.error(e instanceof Error ? e.message : e);
         }
     },
     async messageStatus(msg_id) {
@@ -120,7 +120,7 @@ module.exports = {
             console.log(formatter(res));
         } catch (e) {
             loader.stop();
-            console.error(e);
+            console.error(e instanceof Error ? e.message : e);
         }
     },
     async numberLookup(number) {
@@ -149,7 +149,7 @@ module.exports = {
             console.log(formatter(originalCarrier));
         } catch (e) {
             loader.stop();
-            console.error(e);
+            console.error(e instanceof Error ? e.message : e);
         }
     }
 };
