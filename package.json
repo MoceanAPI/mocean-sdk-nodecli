@@ -2,7 +2,7 @@
   "name": "mocean-cli",
   "version": "1.0.1",
   "description": "This is a Mocean CLI, to use it you will need a mocean account. Signup for free at https://moceanapi.com",
-  "main": "dist/index.js",
+  "main": "dist/mocean.js",
   "scripts": {
     "build": "node node_modules/webpack/bin/webpack.js --progress --config webpack.config.js",
     "prepare": "npm run build"
@@ -27,7 +27,7 @@
     "ora": "^3.4.0"
   },
   "bin": {
-    "mocean": "dist/index.js"
+    "mocean": "dist/mocean.js"
   },
   "devDependencies": {
     "webpack": "^4.35.0",

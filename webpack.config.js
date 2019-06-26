@@ -5,7 +5,7 @@ module.exports = {
     mode: 'production',
     entry: './src/index.js',
     output: {
-        filename: 'index.js',
+        filename: 'mocean.js',
         path: path.resolve(__dirname, 'dist')
     },
     target: 'node',
