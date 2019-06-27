@@ -55,7 +55,7 @@ module.exports = {
             console.log(`API Key    : ${credentials.apiKey}`);
             console.log(`API Secret : ${credentials.apiSecret}`);
         } catch (e) {
-            console.error(e instanceof Error ? e.message : e);
+            console.error(`${chalk.red('Not logged in')}, please run ${chalk.grey('mocean login <api_key> <api_secret>')}`);
         }
     },
     async balance() {
