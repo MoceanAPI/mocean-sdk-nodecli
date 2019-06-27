@@ -3,23 +3,40 @@ const chalk = require('chalk');
 const moceanService = require('./mocean_service');
 const mapper = require('./mapper');
 const formatter = require('./formatter');
+const flows = require('./flows');
 
 const loader = ora('Please Wait...');
 
 module.exports = {
     async login(api_key, api_secret, options) {
-        loader.start();
-
         try {
-            await moceanService.getClientWith(api_key, api_secret)
+            let credentials;
+            if (api_key && api_secret) {
+                credentials = {
+                    apiKey: api_key,
+                    apiSecret: api_secret,
+                };
+            } else {
+                credentials = await flows.doLogin();
+            }
+
+            loader.start();
+            credentials.options = {};
+
+            if (options.url) {
+                credentials.options.baseUrl = options.url;
+            }
+
+            if (options.use) {
+                credentials.options.version = options.use;
+            }
+
+            await moceanService.getClientWith(credentials.apiKey, credentials.apiSecret)
                 .balance()
                 .inquiry({
                     'mocean-medium': 'CLI'
                 });
-            const savedPath = moceanService.save({
-                apiKey: api_key,
-                apiSecret: api_secret
-            }, options.local);
+            const savedPath = moceanService.save(credentials, options.local);
 
             loader.stop();
             console.log(`Credentials save to ${chalk.yellow(savedPath)}`);
@@ -80,9 +97,17 @@ module.exports = {
         }
     },
     async sms(to, text, options) {
-        loader.start();
-
         try {
+            if (!options.confirm) {
+                const confirmation = await flows.confirmSms(to, text);
+                if (!confirmation.answer) {
+                    console.log(chalk.yellow('Sms sending has been cancelled'));
+                    return;
+                }
+            }
+
+            loader.start();
+
             const res = await moceanService.getClient()
                 .sms()
                 .send({
@@ -123,10 +148,18 @@ module.exports = {
             console.error(e instanceof Error ? e.message : e);
         }
     },
-    async numberLookup(number) {
-        loader.start();
-
+    async numberLookup(number, options) {
         try {
+            if (!options.confirm) {
+                const confirmation = await flows.confirmNumberLookup(number);
+                if (!confirmation.answer) {
+                    console.log(chalk.yellow('Number lookup has been cancelled'));
+                    return;
+                }
+            }
+
+            loader.start();
+
             const res = await moceanService.getClient()
                 .number_lookup()
                 .inquiry({

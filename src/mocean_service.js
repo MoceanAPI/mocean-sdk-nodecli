@@ -17,7 +17,8 @@ module.exports = {
         try {
             const credentials = this.read();
             return new moceansdk.Mocean(
-                new moceansdk.Client(credentials.apiKey, credentials.apiSecret)
+                new moceansdk.Client(credentials.apiKey, credentials.apiSecret),
+                credentials.options
             );
         } catch (e) {
             throw new Error(`${chalk.red('Not logged in')}, please run ${chalk.grey('mocean login <api_key> <api_secret>')}`);

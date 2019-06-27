@@ -1,14 +1,15 @@
 const program = require('commander');
-const ora = require('ora');
 const packageInfo = require('../package');
 const api = require('./api');
 
 program
-    .version(packageInfo.version, '-V, --version');
+    .version(`Mocean CLI v${packageInfo.version}`, '-V, --version');
 
 program
-    .command('login <api_key> <api_secret>')
+    .command('login [api_key] [api_secret]')
     .option('-l, --local', 'Save credentials to local directory')
+    .option('-u, --url <url>', 'Specify the rest url, default to https://rest.moceanapi.com')
+    .option('-v, --use <use>', 'Specify the rest version')
     .description('Login using your api key and api secret')
     .action(api.login);
 
@@ -39,6 +40,7 @@ program
 program
     .command('sms <to> <text...>')
     .option('-f, --from <from...>', 'From parameter', 'Mocean CLI')
+    .option('-c, --confirm', 'skip confirmation step')
     .description('Send a Sms')
     .action(api.sms);
 
@@ -50,6 +52,7 @@ program
 
 program
     .command('number:lookup <number>')
+    .option('-c, --confirm', 'skip confirmation step')
     .alias('nl')
     .description('Perform Number Lookup')
     .action(api.numberLookup);
@@ -60,3 +63,7 @@ program.on('command:*', () => {
 });
 
 program.parse(process.argv);
+
+if (!program.args.length) {
+    program.help();
+}
