@@ -82,14 +82,16 @@ Alias : `mocean ap`
 To use [Mocean's SMS API][doc_sms] to send an SMS message, use `mocean sms <to> <text>`.
 
 ```bash
-> mocean sms 60123456789 "Hello World"
+> mocean sms <to> <text>
 ```
 
 Default from will be `Mocean CLI`, you can override it by providing `--from` option
 
 ```bash
-> mocean sms 60123456789 "Hello World" --from "Mocean"
+> mocean sms <to> <text> --from "Mocean"
 ```
+
+Use `--confirm` to skip confirmation step
 
 #### Sms Message Status
 
@@ -119,14 +121,14 @@ Options:
   -h, --help                              output usage information
 
 Commands:
-  login [options] <api_key> <api_secret>  Login using your api key and api secret
+  login [options] [api_key] [api_secret]  Login using your api key and api secret
   logout [options]                        Logout
   account|acc                             Show logged in account
   account:balance|ab                      Check Account Balance
   account:pricing|ap                      Get Account Pricing
   sms [options] <to> <text...>            Send a Sms
   sms:status|ss <msg_id>                  Check message status
-  number:lookup|nl <number>               Perform Number Lookup
+  number:lookup|nl [options] <number>     Perform Number Lookup
 ```
 
 License
