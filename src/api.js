@@ -46,8 +46,12 @@ module.exports = {
         }
     },
     logout(options) {
-        moceanService.delete(options.local);
-        console.log(chalk.green('Successfully logged out'));
+        try {
+            moceanService.delete(options.local);
+            console.log(chalk.green('Successfully logged out'));
+        } catch (e) {
+            console.error(`${chalk.red('Not logged in')}, please run ${chalk.grey('mocean login <api_key> <api_secret>')}`);
+        }
     },
     account() {
         try {
