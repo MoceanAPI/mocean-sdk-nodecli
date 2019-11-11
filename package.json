@@ -19,7 +19,7 @@
   "author": "Micro Ocean Technologies Sdn Bhd",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "cli-table2": "^0.2.0",
     "commander": "^3.0.0",
     "enquirer": "^2.3.0",
